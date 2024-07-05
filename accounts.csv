@@ -1,0 +1,4 @@
+account_num,first_name,last_name,user_name,password,balance
+1,Ben,Thiele ,bthiele,pass,100
+2,Jim,Held,jheld,pass,200
+3,Frank,Sun,fson,pass,300

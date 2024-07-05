@@ -1,0 +1,138 @@
+Banking Application
+
+Features:
+- User accounts will be represented by csv rows
+- Each object will contain attributes such as:
+	account_num
+	first_name
+	last_name
+	user_name
+	password
+	balance
+
+- There will be a login menu with the following option
+	- Login
+	
+- This will lead to a user menu 
+	- Show Balance
+	- Deposit
+	- Withdraw
+	- Transfer
+	- Logout
+	
+- Have admin view?
+	- display all accounts
+		-format to look nice?
+	- account look up
+		- simply displays account data
+	- transfer between two accounts
+	- create account
+	- delete account
+		- make sure you cannot delete admin
+	- admin object only containing username and password
+		
+		
+		
+Structure of Rows:
+{
+	account_num: float,
+	first_name: "String" ,
+	last_name: "String",
+	user_name: "String",
+	password: "String",
+	balance: float
+}
+
+Logic:
+	Login
+	- User enters a username and password
+	- Program will check if username exists
+		- if username does not exist, notify user to try again
+		- if username exists, verify password matches user
+			- if password is invalid, notify user to try again
+	- Upon successful login the json object should be saved to a temp variable(JSON/dict/class)
+	- Upon logout, replace/modify original JSON Object
+		
+	Show Balance
+	- Will print current balance to the screen. Ex. "Your current balance is ???"
+	- Make sure decimal percision is 2 places
+	- return to user menu
+		
+	Deposit
+	- Ask user how much they would like to deposit
+	- Modify value of 'balance'
+	- print new balance on screen
+	- return to user menu
+		
+	Withdraw
+	- Ask user how much they would like to withdraw
+	- check if user has enough money
+		- if user has enough money, update balance, display new balance and return to user menu
+		- if user does not have enough money, notify if user still wants to withdraw. Overdraft allowed up to $500.
+			- if user declines return to user menu
+			- if user exceeds $500 in overdraft, decline and return to menu
+			- if user says yes, update balance, and return to menu
+				
+	Transfer
+	- User should only be able to add money to another account, now withdraw from another account
+	- Ask user for an account number they want to add funds to
+		- verify that the account number exists
+			- if account does not exist, notify user and exit
+			- if account exists, ask user how much to transfer
+				- verify user has enough funds
+					- if feasible, add funds 
+					- if not, notfiy user, print new balance, and return to user menu
+						
+	Logout
+	- update json file with account info
+	- exit to login screen
+						
+	Display all accounts
+	- Simply display all accounts with nice formatting
+	
+	Account lookup
+	- Prompt admin for account number
+	- verify account number exists
+		- if account exists, extract user data and print on screen
+		- if account does not exist, notfiy and return to admin view
+		
+	Create account
+	- Prompt for new username
+		- Verify if username exists
+			- if username exists, notify admin and return to admin view
+			- if username does not exist, prompt for user password
+				- generate random 4 digit account number
+				- verify that account does not exist
+					- if account already exists generate new number
+	- Prompt for first_name, last_name
+	- Print new user and return to admin menu
+	
+	
+	Delete account
+	- Lookup account
+	- Ask admin if he/she is sure to delete
+	- Remove account from file
+	- Return to admin view
+	
+	
+Structure:
+
+	Folders/modules
+	- main.py for menu
+	- util.py for utility functions
+	- custom_exceptions for input validation
+
+	Login Menu
+	- Declare current_username variable and current_user_password and ask for credentials via input()
+	- Execute user login method
+		- move to appropriate view if credentials are correct (admin/user)
+		- return to login if creditials are invaild
+
+	
+Validation:
+- make sure rows have correct values length when updating
+- username, and account number must be unique
+
+
+General Notes:
+- Be sure to cast numbers to appropriate type (int, float) before updating a row
