@@ -68,10 +68,8 @@ Logic:
 	- Ask user how much they would like to withdraw
 	- check if user has enough money
 		- if user has enough money, update balance, display new balance and return to user menu
-		- if user does not have enough money, notify if user still wants to withdraw. Overdraft allowed up to $500.
-			- if user declines return to user menu
-			- if user exceeds $500 in overdraft, decline and return to menu
-			- if user says yes, update balance, and return to menu
+		- if user exceeds $500 in overdraft, decline and return to menu
+	
 				
 	Transfer
 	- User should only be able to add money to another account, now withdraw from another account
@@ -84,7 +82,6 @@ Logic:
 					- if not, notfiy user, print new balance, and return to user menu
 						
 	Logout
-	- update json file with account info
 	- exit to login screen
 						
 	Display all accounts
@@ -136,3 +133,4 @@ Validation:
 
 General Notes:
 - Be sure to cast numbers to appropriate type (int, float) before updating a row
+- Verify if an account number exists before adding a new account

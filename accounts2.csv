@@ -1,4 +1,5 @@
 account_num,first_name,last_name,user_name,password,balance
-1,Ben,Thiele ,bthiele,pass,100.00
-2,Jim,Held,jheld,pass,200.00
+1,Ben,Thiele,bthiele,pass,0
+2,Jim,Held,jheld,pass,-456.11
 3,Frank,Sun,fson,pass,300.00
+4,Saul,Shields,sshields,pass,1.00

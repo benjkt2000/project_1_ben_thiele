@@ -1,6 +1,4 @@
 import csv
-# TEst comment for push
-
 # READ/WRITE FUNCTIONS
 ###################################################
 
@@ -10,6 +8,15 @@ def retrieve_accounts():
         csv_reader=csv.reader(file)
         accounts = [row for row in csv_reader]
     return accounts
+
+# Add row to .csv
+def add_account(accounts: list, new_account: list):
+    with open('./accounts2.csv', 'w',newline="") as file:
+        csv_writer=csv.writer(file)
+        accounts.append(new_account)
+
+        for acc in accounts:
+            csv_writer.writerow(acc)
 
 # Update row in .csv
 # Add account validation?
@@ -37,7 +44,7 @@ def find_account_by_username(accounts: list, username: str):
     else: 
         return None
 
-# BANKING/VALIDATION FUNCTIONS       
+# VALIDATION FUNCTIONS       
 ###################################################
 
 # Validate credentials
@@ -51,12 +58,12 @@ def validate_credentials(username: str, password: str, accounts: list):
     return False
 
 # Check if account number exists
-# def check_if_account_exists(accounts: list, account_number: int):
-#     for account in accounts:
-#         print(account)
-#         if account[0] == str(account_number):
-#             return True
-#     return False
+def check_if_account_exists(accounts: list, account_number: int):
+    for account in accounts:
+        print(account)
+        if account[0] == str(account_number):
+            return True
+    return False
 
 # Validate account format? ex. length, data types, account number does not exist
 
@@ -86,6 +93,35 @@ def validate_credentials(username: str, password: str, accounts: list):
 #     return True
 
 
+# BANK FEATURE METHODS
+######################################################
+def retrieve_balance(account: list):
+    if len(account) == 6:
+        return "{:.{}f}".format(float(account[5]), 2)
+
+def deposit(accounts: list, account: list, amount: float, account_index: int):
+    updated_account = account
+
+    if len(account) == 6:
+        original_balance = retrieve_balance(account)
+        updated_account[5] = "{:.{}f}".format(float(amount) + float(original_balance), 2) 
+        update_account(accounts, updated_account, account_index)
+
+    return updated_account
+
+def withdraw(accounts: list, account: list, amount: float, account_index: int):
+    updated_account = account
+
+    if len(account) == 6:
+        original_balance = retrieve_balance(account)
+        new_balance = float(original_balance) - amount
+
+        if new_balance > -500.00:
+            updated_account[5] = "{:.{}f}".format(float(new_balance), 2)
+            update_account(accounts, updated_account, account_index)
+
+    return updated_account    
+
 
 ######################################################
 accounts = retrieve_accounts()
@@ -94,11 +130,18 @@ accounts = retrieve_accounts()
 account = accounts[1]
 # print(account)
 
-#index = find_account_index(accounts, account)
-#print(index)
+print(deposit(accounts, account, 157.63, find_account_index(accounts, account)))
+#print(withdraw(accounts, account, 116.53, find_account_index(accounts, account)))
 
-# new_account = [1,'ben', 'thiele' , 'bthiele', 'pass', '100']
-# update_account(accounts, new_account, index)
+# print(retrieve_balance(account))
+
+# index = find_account_index(accounts, account)
+# print(index)
+
+#new_account = [4,'Saul' , 'Shields' ,'sshields', 'pass', 100]
+#update_account(accounts, new_account, index)
+
+#add_account(accounts, new_account)
 
 # retrieved_account = find_account_by_username(accounts, "bthiele")
 # print(retrieved_account)
