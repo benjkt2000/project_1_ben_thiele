@@ -14,10 +14,10 @@ Features:
 	- Login
 	
 - This will lead to a user menu 
-	- Show Balance
-	- Deposit
-	- Withdraw
-	- Transfer
+	- Show Balance*
+	- Deposit*
+	- Withdraw*
+	- Transfer*
 	- Logout
 	
 - Have admin view?
@@ -134,3 +134,4 @@ Validation:
 General Notes:
 - Be sure to cast numbers to appropriate type (int, float) before updating a row
 - Verify if an account number exists before adding a new account
+- if a file does not exist be sure to generate at beginning of program

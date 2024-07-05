@@ -1,4 +1,6 @@
 import csv
+import pandas as pd
+import numpy as np
 # READ/WRITE FUNCTIONS
 ###################################################
 
@@ -34,6 +36,15 @@ def update_account(accounts: list, updated_account: list, account_index: int):
 def find_account_index(accounts: list, account: list):
     account_index = accounts.index(account)
     return account_index
+
+def find_account_by_account_number(accounts: list, account_num: int):
+    if len(accounts) != 0:
+        for account in accounts:
+            if account[0] == str(account_num):
+                return account
+    else:
+        return None   
+
 
 # Find account my username
 def find_account_by_username(accounts: list, username: str):
@@ -122,34 +133,56 @@ def withdraw(accounts: list, account: list, amount: float, account_index: int):
 
     return updated_account    
 
+def transfer(accounts: list, sending_acc_num: int, receiving_acc_num: int, amount: float):
+    sending_acc = find_account_by_account_number(accounts, sending_acc_num)
+    receiving_acc = find_account_by_account_number(accounts, receiving_acc_num)
 
+    sending_acc_bal = sending_acc[5]
+
+    if float(sending_acc_bal) - amount < -500.00:
+        return sending_acc
+    else:
+        updated_sender = withdraw(accounts, sending_acc, amount, find_account_index(accounts, sending_acc))
+        deposit(accounts, receiving_acc, amount, find_account_index(accounts, receiving_acc))
+        return updated_sender
+    
+def display_all_accounts(accounts: list):
+    formatted_accounts = pd.DataFrame(accounts[1::], columns=['Account Number', 'First Name', 'Last Name', 'User Name', 'Password', 'Balance'])
+    formatted_accounts.replace({None: np.nan})
+
+    print(formatted_accounts)
+    
+# Make sure amounts to deposit are not NEGATIVE!!!
 ######################################################
 accounts = retrieve_accounts()
 # print(accounts)
 
-account = accounts[1]
+#account = accounts[1]
 # print(account)
 
-print(deposit(accounts, account, 157.63, find_account_index(accounts, account)))
-#print(withdraw(accounts, account, 116.53, find_account_index(accounts, account)))
+#print(deposit(accounts, account, 99.07, find_account_index(accounts, account)))
+#print(withdraw(accounts, account, 116.52, find_account_index(accounts, account)))
 
 # print(retrieve_balance(account))
 
 # index = find_account_index(accounts, account)
 # print(index)
 
-#new_account = [4,'Saul' , 'Shields' ,'sshields', 'pass', 100]
+new_account = ['005','Saul' , 'Shields' ,'sshields', 'pass', '100']
 #update_account(accounts, new_account, index)
 
-#add_account(accounts, new_account)
+add_account(accounts, new_account)
 
 # retrieved_account = find_account_by_username(accounts, "bthiele")
 # print(retrieved_account)
 
 # print(validate_credentials('bthiele', 'pass', accounts))
 
+# print(find_account_by_account_number(accounts, 1))
 
+# print(transfer(accounts, 2, 4, 150.00))
 
+display_all_accounts(accounts)
 
 
 
