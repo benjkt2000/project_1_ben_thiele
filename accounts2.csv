@@ -1,7 +1,5 @@
-account_num,first_name,last_name,user_name,password,balance
-001,Ben,Thiele,bthiele,pass,-470.55
-002,Jim,Held,jheld,pass,-400.00
+000,,,admin,admin,
+001,Benjamin,Thiele,bthiele,pass,100.00
+002,Jim,Held,jheld,pass,200.00
 003,Frank,Sun,fson,pass,300.00
-004,Steve,Scott,sscott,pass,400.00
-005,Saul,Shields,sshields,pass,100
-005,Saul,Shields,sshields,pass,100
+004,Saul,Shields,sshields,pass,400.00

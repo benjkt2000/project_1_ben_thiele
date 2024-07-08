@@ -21,14 +21,15 @@ Features:
 	- Logout
 	
 - Have admin view?
-	- display all accounts
-		-format to look nice?
-	- account look up
-		- simply displays account data
-	- transfer between two accounts
-	- create account
-	- delete account
+	- display all accounts*
+		-format to look nice?*
+	- account look up*
+		- simply displays account data*
+	- transfer between two accounts*
+	- create account*
+	- delete account*
 		- make sure you cannot delete admin
+		
 	- admin object only containing username and password
 		
 		
