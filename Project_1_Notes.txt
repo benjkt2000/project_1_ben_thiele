@@ -22,14 +22,14 @@ Features:
 	
 - Have admin view?
 	- display all accounts*
-		-format to look nice?*
-	- account look up*
-		- simply displays account data*
-	- transfer between two accounts*
-	- create account*
-	- delete account*
+		-format to look nice?
+	- account look up
+		- simply displays account data
+	- transfer between two accounts
+	- create account *
+	- remove account *
 		- make sure you cannot delete admin
-		
+
 	- admin object only containing username and password
 		
 		
