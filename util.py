@@ -71,14 +71,6 @@ def validate_credentials(username: str, password: str, accounts: list):
     
     return False
 
-# Check if account number exists
-# def check_if_account_exists(accounts: list, account_number: int):
-#     for account in accounts:
-#         print(account)
-#         if account[0] == str(account_number):
-#             return True
-#     return False
-
 # Find account my username
 def find_account_by_username(accounts: list, username: str):
     if len(accounts) != 0:
@@ -90,6 +82,7 @@ def find_account_by_username(accounts: list, username: str):
     
 # MENU EXECUTION
 ###################################################
+
 def execute_login_menu(accounts: list):
     valid_credentials = False
     while valid_credentials != True:
