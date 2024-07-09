@@ -1,6 +1,7 @@
 from account import Account
 from util import *
 import pandas as pd
+import numpy as np
 
 class Accounts:
     csv_data = []
@@ -18,6 +19,7 @@ class Accounts:
         formatted_accounts.replace({None: np.nan})
 
         print(formatted_accounts)
+        print()
 
     def account_lookup(self, account_num: str):
         account = self.find_account_by_account_number(account_num)
@@ -33,13 +35,16 @@ class Accounts:
     
 
     def create_account(self, new_account: Account) :
+        if self.find_account_by_account_number(new_account.account_num) != None:
+            return False
+        
         converted_account = self.convert_account_to_list(new_account)
         add_account(self.csv_data, converted_account)
         self.refresh_accounts()
 
         return True
 
-    def delete_account(self, account_num: Account):
+    def delete_account(self, account_num: str):
         account_index = self.find_account_index_by_number(account_num)
         if account_index != None:
             delete_account(self.csv_data, account_index)

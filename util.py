@@ -124,6 +124,7 @@ def execute_user_menu(current_account: Account, all_accounts):
        
         elif command == '2':
             amount = input('Please enter an amount (ex. 100.00): ')
+            
             if re.match(r'^-?\d+(?:\.\d+)$', amount) is not None:
                 success = accounts.deposit(user_account.account_num, float(amount))
                 if success:
@@ -135,6 +136,7 @@ def execute_user_menu(current_account: Account, all_accounts):
        
         elif command == '3':
             amount = input('Please enter an amount (ex. 100.00): ')
+            
             if re.match(r'^-?\d+(?:\.\d+)$', amount) is not None:
                 success = accounts.withdraw(user_account.account_num, float(amount))
                 if success:
@@ -147,6 +149,7 @@ def execute_user_menu(current_account: Account, all_accounts):
         elif command == '4':
             tranferee = input('Please enter the account number to transfer to: ')
             amount = input('Please enter an amount (ex. 100.00): ')
+            
             if re.match(r'^-?\d+(?:\.\d+)$', amount) is not None:
                 success = accounts.transfer(user_account.account_num, tranferee, float(amount))
                 if success:
@@ -157,16 +160,98 @@ def execute_user_menu(current_account: Account, all_accounts):
                 print('Must be a dollar amount.\n')
        
         elif command == '5':
-            print('Returning to Login Screen\n')
+            user_response = input("Close application? 'Y' for yes and any other char for no.: ")
+
+            if user_response == 'Y':
+                return False
+            else: 
+                return True      
        
         else:
             print('Invalid Command.\n')
 
 
+def execute_admin_menu(current_account: Account, all_accounts):
+    user_account = current_account
+    accounts = all_accounts
 
-    
- 
+    command = -1
+    while command != '6':
+        print('ADMIN MENU')
+        print('1. Display All Accounts')
+        print('2. Account Look Up')
+        print('3. Transfer')
+        print('4. Create Account')
+        print('5. Remove Account')
+        print('6. Logout\n')
+        command = input('Please enter a command: ')
+        print()
 
+        if command == '1':
+            accounts.display_all_accounts()
+        
+        elif command == '2':
+            acc_num = input("Please enter an account number: ")
+            look_up = accounts.find_account_by_account_number(acc_num)
+            
+            if look_up != None:
+                print()
+                Account(look_up).display_account()
+            else:
+                print("Account Not Found\n")
+        elif command == '3':
+            origin = input('Please enter the account number to transfer from: ')
+            tranferee = input('Please enter the account number to transfer to: ')
+            amount = input('Please enter an amount (ex. 100.00): ')
+            
+            if re.match(r'^-?\d+(?:\.\d+)$', amount) is not None:
+                success = accounts.transfer(origin, tranferee, float(amount))
+                if success:
+                    print('Transfer completed.\n')
+                else:
+                    print('Transfer failed.\n')
+            else:
+                print('Must be a dollar amount.\n')
+        elif command == '4':
+            new_acc_num = input('Please enter a new account number: ')
+            new_first_name = input('Please Enter a new first name: ')
+            new_last_name = input('Please Enter a new last name: ')
+            new_username = input('Please Enter a new username: ')
+            new_password = input('Please enter a password: ')
+            print()
+
+            if new_acc_num.isdigit():
+                new_account = Account([new_acc_num, new_first_name, new_last_name, new_username, new_password, '0.00'])
+                success = accounts.create_account(new_account)
+                if success:
+                    print('Account added successfuly.\n')
+                else:
+                    print('Failed to add new account.\n')
+            else:
+                print('Account number must be digit\n')
+        elif command == '5':
+            acc_num = input("Please enter an account number: ")
+            look_up = accounts.find_account_by_account_number(acc_num)  
+            
+            if look_up != None and acc_num != '000':
+                print()
+                success = accounts.delete_account(acc_num)
+                if success:
+                    print('Account deleted successfuly.\n')
+                else:
+                    print('Failed to delete account.\n')
+            else:
+                print("Account Not Found\n")
+        
+        elif command == '6':
+            user_response = input("Close application? 'Y' for yes and any other char for no.: ")
+
+            if user_response == 'Y':
+                return False
+            else: 
+                return True            
+        else:
+            print('Invalid Command.\n')
 
 
 
