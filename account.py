@@ -11,4 +11,4 @@ class Account:
         print('Name: ' + self.first_name + ' ' + self.last_name)
         print('User name: ' + self.username)
         print('Account Number: ' + self.account_num)
-        print('Balance: ' + self.balance)
+        print('Balance: ' + self.balance + '\n')

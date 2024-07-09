@@ -2,7 +2,7 @@ from account import Account
 from accounts import Accounts
 from util import *
 
-# MAIN MENU
+# BANK APPLICATION
 
 # Check if .csv exists
 if check_if_bank_exists() == False:
@@ -10,17 +10,19 @@ if check_if_bank_exists() == False:
 
 # Load accounts into program
 csv_data = retrieve_accounts()
-
-print(csv_data)
-
+accounts = Accounts(csv_data)
 
 # Login Prompt
-# execute_login_menu(accounts)
+while True:
 
+    credentials = execute_login_menu(csv_data)
+    current_user_account = Account(find_account_by_username(csv_data, credentials[0]))
 
-
-
-
+    if current_user_account.username == 'admin':
+        print('logged in as admin')
+    else:
+        print(f'Logged in as {credentials[0]}\n')
+        execute_user_menu(current_user_account, accounts)
 
 
 

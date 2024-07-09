@@ -72,11 +72,11 @@ class Accounts:
             original_balance = float(account[5])
             new_balance = original_balance - amount
 
-            if new_balance >= -500.00:
+            if new_balance >= -500.00 and amount >= 0:
                 account[5] = "{:.{}f}".format(float(new_balance), 2)
-            update_account(self.csv_data, account, account_index)
-            self.refresh_accounts()
-            return True
+                update_account(self.csv_data, account, account_index)
+                self.refresh_accounts()
+                return True
        
         return False
     
@@ -88,7 +88,7 @@ class Accounts:
 
         if sending_acc != None and receiving_acc != None and sending_acc_index != None and receiving_acc_index != None:
             potential_balance = float(sending_acc[5]) - amount
-            if potential_balance >= -500:
+            if potential_balance >= -500 and amount >= 0:
                 self.withdraw(sending_acc_num, amount)
                 self.deposit(receiving_acc_num, amount)
                 self.refresh_accounts()
@@ -125,3 +125,4 @@ class Accounts:
                     return account
         else:
             return None  
+    
